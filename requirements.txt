@@ -4,3 +4,5 @@ torchvision
 numpy
 gradio
 pillow
+opencv-python
+google-generativeai
