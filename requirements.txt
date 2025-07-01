@@ -1,0 +1,6 @@
+faiss-cpu
+torch
+torchvision
+numpy
+gradio
+pillow
