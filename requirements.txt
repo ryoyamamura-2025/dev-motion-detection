@@ -5,4 +5,6 @@ numpy
 gradio
 pillow
 opencv-python
-google-generativeai
+google-genai
+pydantic
+python-dotenv
