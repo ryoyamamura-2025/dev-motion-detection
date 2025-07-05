@@ -8,3 +8,4 @@ opencv-python
 google-genai
 pydantic
 python-dotenv
+yt_dlp
