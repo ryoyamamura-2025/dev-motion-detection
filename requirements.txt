@@ -6,6 +6,9 @@ gradio
 pillow
 opencv-python
 google-genai
+google-cloud-storage
 pydantic
 python-dotenv
 yt_dlp
+fastapi
+uvicorn
