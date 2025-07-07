@@ -14,7 +14,7 @@ def process_and_upload(file_obj):
         str: アップロード結果のメッセージ
     """
     if file_obj is None:
-        return "ファイルがアップロードされていません。"
+        return "ファイルがアップロードされていません。", gr.Dropdown.update()
 
     # Gradio はアップロードされたファイルを一時パスに保存
     # file_obj.name が一時的なパス
@@ -27,6 +27,8 @@ def process_and_upload(file_obj):
         updated_blob_list = handle_get_blob()
         return f"{gcs_path}にアップロードされました。", gr.Dropdown.update(choices=updated_blob_list)
     except Exception as e:
+        # エラー時にもファイル一覧を更新
+        updated_blob_list = handle_get_blob()
         return f"アップロード中にエラーが発生しました: {str(e)}", gr.Dropdown.update(choices=updated_blob_list)
 
 def get_blob_list():
@@ -43,7 +45,7 @@ def get_blob_list():
         return [f"エラーが発生しました: {str(e)}"]
 
 
-def gemini_request(prompt, selected_filename):
+def gemini_request(selected_filename, prompt):
     request = GenerateRequest(prompt=prompt, filename=selected_filename if selected_filename else None)
     result = handle_gemini_request(request)
     if isinstance(result, dict) and "result" in result:
@@ -72,8 +74,10 @@ with gr.Blocks() as demo:
         gcs_file_dropdown = gr.Dropdown(
             label="GCS ファイルを選択",
             choices=[], # 初期値は空、後で更新
-            interactive=True
+            interactive=True,
+            allow_custom_value=True
         )
+
         refresh_files_button = gr.Button("GCSファイル一覧を更新")
         # プロンプト入力
         prompt_input = gr.Textbox(label="Gemini へのプロンプト", lines=5, placeholder="ここにプロンプトを入力してください...")

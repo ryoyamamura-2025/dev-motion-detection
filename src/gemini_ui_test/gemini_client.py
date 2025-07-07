@@ -54,20 +54,19 @@ def generate_text_with_file(prompt: str, filename: str) -> str:
     Returns:
         str: 推論結果のテキスト
     """
-    GCS_ROOT_PATH = os.environ.get("GCS_ROOT_PATH")
+    GCS_BUCKET_NAME = os.environ.get("GCS_BUCKET_NAME")
     ext = os.path.splitext(filename)[-1].lower()
+    gs_path = f"gs://{GCS_BUCKET_NAME}/{filename}"
 
     if ext in [".mp4", ".mov", ".avi", ".mkv", ".webm"]:
         # 動画ファイルの場合
         mime_type = "video/" + ext[1:]
-        gs_path = os.path.join(GCS_ROOT_PATH, "video", filename)
     elif ext in [".jpg", ".jpeg", ".png"]:
         # 画像ファイルの場合
         if ext == ".jpg":
             mime_type = "image/jpeg"
         else:
             mime_type = "image/" + ext[1:]
-        gs_path = os.path.join(GCS_ROOT_PATH, "image", filename)
     else:
         raise ValueError(f"未対応のファイル形式です: {ext}")
 
