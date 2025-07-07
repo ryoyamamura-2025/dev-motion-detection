@@ -14,7 +14,7 @@ def process_and_upload(file_obj):
         str: アップロード結果のメッセージ
     """
     if file_obj is None:
-        return "ファイルがアップロードされていません。", gr.Dropdown.update()
+        return "ファイルがアップロードされていません。", gr.Dropdown()
 
     # Gradio はアップロードされたファイルを一時パスに保存
     # file_obj.name が一時的なパス
@@ -25,11 +25,11 @@ def process_and_upload(file_obj):
         gcs_path = handle_file_upload(uploaded_file_path)
         # アップロード後、ファイル選択プルダウンを更新
         updated_blob_list = handle_get_blob()
-        return f"{gcs_path}にアップロードされました。", gr.Dropdown.update(choices=updated_blob_list)
+        return f"{gcs_path}にアップロードされました。", gr.Dropdown(choices=updated_blob_list)
     except Exception as e:
         # エラー時にもファイル一覧を更新
         updated_blob_list = handle_get_blob()
-        return f"アップロード中にエラーが発生しました: {str(e)}", gr.Dropdown.update(choices=updated_blob_list)
+        return f"アップロード中にエラーが発生しました: {str(e)}", gr.Dropdown(choices=updated_blob_list)
 
 def get_blob_list():
     """
@@ -40,9 +40,9 @@ def get_blob_list():
     """
     try:
         blob_names = handle_get_blob()
-        return blob_names
+        return gr.Dropdown(choices=blob_names)
     except Exception as e:
-        return [f"エラーが発生しました: {str(e)}"]
+        return gr.Dropdown(choices=[f"エラーが発生しました: {str(e)}"])
 
 
 def gemini_request(selected_filename, prompt):
