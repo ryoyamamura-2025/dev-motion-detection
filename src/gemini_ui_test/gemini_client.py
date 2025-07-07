@@ -1,47 +1,87 @@
 import os
 from dotenv import load_dotenv
 from google import genai
-import time
+from google.genai.types import HttpOptions, Part
 
 # =================================
 # Gemini 推論設定
 # =================================
-load_dotenv()
-GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
+load_dotenv() # GOOGLE_APPLICATION_CREDENTIALS を読み込む
+# GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
+GCP_PROJECT_ID = os.environ["GCP_PROJECT_ID"]
+LOCATION = os.environ["LOCATION"]
 
 # Geminiクライアント初期化
-client = genai.Client(api_key=GEMINI_API_KEY)
+# client = genai.Client(api_key=GEMINI_API_KEY)
+client = genai.Client(
+    vertexai=True,
+    project=GCP_PROJECT_ID,
+    location=LOCATION,
+    http_options=HttpOptions(api_version="v1")
+  )
 
 # =================================
 # Gemini 推論ロジック
 # =================================
-def invoke_gemini_from_file(prompt: str, file_type: str, filename: str = None) -> str:
+def generate_text(prompt: str) -> str:
+    """
+    単純な Gemini へのリクエスト
+
+    Args:
+        prompt(str): プロンプト（ファイルの後ろにいれる）
+    
+    Returns:
+        str: 推論結果のテキスト
+    """
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt
+    )
+
+    result = response.text
+    
+    return result
+
+
+def generate_text_with_file(prompt: str, filename: str) -> str:
+    """
+    Google Storage に保存されたファイルをインプットに含めて推論する
+
+    Args:
+        prompt(str): プロンプト（ファイルの後ろにいれる）
+        gs_path (str): Google Storageのパス（gs://bucket_name/file_name）
+    
+    Returns:
+        str: 推論結果のテキスト
+    """
+    GCS_ROOT_PATH = os.environ.get("GCS_ROOT_PATH")
+    ext = os.path.splitext(filename)[-1].lower()
+
+    if ext in [".mp4", ".mov", ".avi", ".mkv", ".webm"]:
+        # 動画ファイルの場合
+        mime_type = "video/" + ext[1:]
+        gs_path = os.path.join(GCS_ROOT_PATH, "video", filename)
+    elif ext in [".jpg", ".jpeg", ".png"]:
+        # 画像ファイルの場合
+        if ext == ".jpg":
+            mime_type = "image/jpeg"
+        else:
+            mime_type = "image/" + ext[1:]
+        gs_path = os.path.join(GCS_ROOT_PATH, "image", filename)
+    else:
+        raise ValueError(f"未対応のファイル形式です: {ext}")
+
     try:
-        contents = []
-
-        if filename:
-            if not os.path.exists(filename):
-                raise FileNotFoundError(f"File not found: {filename}")
-
-            uploaded_file = client.files.upload(file=filename)
-            
-            if file_type == "video":
-                while uploaded_file.state.name == "PROCESSING":
-                    print("Waiting for video to be processed...")
-                    time.sleep(2)
-                    uploaded_file = client.files.get(name=uploaded_file.name)
-
-                if uploaded_file.state.name == "FAILED":
-                    raise ValueError("Upload failed.")
-
-            contents.append(uploaded_file)
-
-        contents.append({"text": prompt})
+        contents = [
+            Part.from_uri(file_uri=gs_path, mime_type=mime_type),
+            prompt
+        ]
 
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-2.0-flash",
             contents=contents
         )
+
         result = response.text
         
         return result
@@ -49,3 +89,8 @@ def invoke_gemini_from_file(prompt: str, file_type: str, filename: str = None) -
     except Exception as e:
         return f"Error: {str(e)}"
 
+if __name__ == "__main__":
+    # テスト実行用
+    filename = "pana.mp4"
+    print(generate_text_with_file(prompt="この動画を要約して", filename=filename))
+    # print(generate_text(prompt="へろー"))

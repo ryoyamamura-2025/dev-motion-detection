@@ -10,5 +10,5 @@ google-cloud-storage
 pydantic
 python-dotenv
 yt_dlp
-fastapi
-uvicorn
+# fastapi
+# uvicorn
