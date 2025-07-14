@@ -1,8 +1,9 @@
-from ultralytics import YOLO
-import cv2
 import os
 from dotenv import load_dotenv
 import time
+from ultralytics import YOLO
+from deep_sort_realtime.deepsort_tracker import DeepSort
+import cv2
 
 load_dotenv()
 PROJECT_ROOT = os.environ["PROJECT_ROOT"]
@@ -24,6 +25,9 @@ os.makedirs(output_pred_dir, exist_ok=True)
 model_path = os.path.join(MODEL_DIR, "yolov8n.pt")
 model = YOLO(model_path)
 
+# DeepSORT初期化
+tracker = DeepSort(max_age=30, n_init=2, nms_max_overlap=1.0)
+
 # フレームごとに保存
 cap = cv2.VideoCapture(video_path)
 frame_id = 0
@@ -43,19 +47,36 @@ while cap.isOpened():
     result = model(frame, verbose=False)[0]  # 推論1回分
     annotated_frame = frame.copy()
 
+    # DeepSORTトラッキング
+    detections_for_tracker = [] 
+
     for box in result.boxes:
-        x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
         cls_id = int(box.cls.item())
-        if model.names[cls_id] == "refrigerator" or model.names[cls_id] == "remote":
-            conf = float(box.conf.item())
-            label = f"{model.names[cls_id]} {conf:.2f}"
-            # BBOX描画
-            cv2.rectangle(annotated_frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.putText(annotated_frame, label, (x1, y1 - 10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        name = model.names[cls_id]
+        if name not in ["refrigerator", "remote"]:
+            continue
+        x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
+        conf = float(box.conf.item())
+
+        # DeepSORT用: [x1, y1, x2 - x1, y2 - y1]
+        detections_for_tracker.append(([x1, y1, x2 - x1, y2 - y1], conf, name))
+
+    # DeepSORT追跡
+    annotated_frame = frame.copy()
+    tracks = tracker.update_tracks(detections_for_tracker, frame=frame)
+
+    for track in tracks:
+        if not track.is_confirmed():
+            continue
+        x1, y1, x2, y2 = map(int, track.to_ltrb())
+        track_id = track.track_id
+
+        cv2.rectangle(annotated_frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+        cv2.putText(annotated_frame, f"ID {track_id}", (x1, y1 - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
     # BBOX付き画像保存
-    annotated_path = os.path.join(output_pred_dir, f"yolo_{frame_id:04d}.jpg")
+    annotated_path = os.path.join(output_pred_dir, f"yolo_deep_{frame_id:04d}.jpg")
     cv2.imwrite(annotated_path, annotated_frame)
 
     frame_id += 1
