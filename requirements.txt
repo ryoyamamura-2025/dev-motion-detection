@@ -12,3 +12,6 @@ python-dotenv
 yt_dlp
 # fastapi
 # uvicorn
+
+ultralytics
+deep_sort_realtime
