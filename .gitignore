@@ -1,7 +1,8 @@
 .gradio/
-/test/
+test/
 test.py
-/log/
+log/
+data/output/*
 arcane-antler-460612-d2-1db950c8bc4a.json
 arcane-antler-460612-d2-d69a5f0b294b.json
 
