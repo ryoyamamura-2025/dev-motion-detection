@@ -1,0 +1,362 @@
+{
+	"database": {
+		"xZecGPPhbHE": {
+			"recipe_type": 122,
+			"annotation": [
+				{
+					"id": "325",
+					"segment": [
+						25.0,
+						30.0
+					],
+					"label": "pull up the hair to reserve place for the hair extensions"
+				},
+				{
+					"id": "326",
+					"segment": [
+						31.0,
+						49.0
+					],
+					"label": "put on the hair extensions"
+				},
+				{
+					"id": "327",
+					"segment": [
+						107.0,
+						117.0
+					],
+					"label": "put down the hair and comb"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/xZecGPPhbHE",
+			"start": 19.621378525393986,
+			"end": 134.36378671172514,
+			"duration": 185.085,
+			"class": "PutOnHairExtensions",
+			"subset": "testing"
+		},
+		"NLy71UrHElw": {
+			"recipe_type": 116,
+			"annotation": [
+				{
+					"id": "373",
+					"segment": [
+						21.0,
+						22.0
+					],
+					"label": "begin to run up"
+				},
+				{
+					"id": "374",
+					"segment": [
+						23.0,
+						24.0
+					],
+					"label": "begin to jump up"
+				},
+				{
+					"id": "375",
+					"segment": [
+						25.0,
+						26.0
+					],
+					"label": "fall to the ground"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/NLy71UrHElw",
+			"start": 20.407162179718902,
+			"end": 26.795,
+			"duration": 26.795,
+			"class": "PractisePoleVault",
+			"subset": "training"
+		},
+		"ewmdE3DmlL0": {
+			"recipe_type": 66,
+			"annotation": [
+				{
+					"id": "338",
+					"segment": [
+						30.0,
+						34.0
+					],
+					"label": "place the bicycle on the bracket"
+				},
+				{
+					"id": "339",
+					"segment": [
+						35.0,
+						60.0
+					],
+					"label": "fasten the strap"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/ewmdE3DmlL0",
+			"start": 28.65146620375997,
+			"end": 60.33288616425457,
+			"duration": 63.483333,
+			"class": "InstallBicycleRack",
+			"subset": "testing"
+		},
+		"JTmzWWU7s1M": {
+			"recipe_type": 94,
+			"annotation": [
+				{
+					"id": "386",
+					"segment": [
+						172.0,
+						179.0
+					],
+					"label": "put the melted soap block into the vessel"
+				},
+				{
+					"id": "387",
+					"segment": [
+						180.0,
+						182.0
+					],
+					"label": "take out after freezing"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/JTmzWWU7s1M",
+			"start": 166.54583795799286,
+			"end": 199.5820116575816,
+			"duration": 217.199456,
+			"class": "MakeSoap",
+			"subset": "training"
+		},
+		"jXYZEb-56Wc": {
+			"recipe_type": 69,
+			"annotation": [
+				{
+					"id": "332",
+					"segment": [
+						39.5,
+						47.5
+					],
+					"label": "wipe screen"
+				},
+				{
+					"id": "331",
+					"segment": [
+						49.5,
+						85.0
+					],
+					"label": "place label"
+				},
+				{
+					"id": "333",
+					"segment": [
+						85.5,
+						108.0
+					],
+					"label": "paste protector on the screen"
+				},
+				{
+					"id": "335",
+					"segment": [
+						108.5,
+						112.0
+					],
+					"label": "remove the label"
+				},
+				{
+					"id": "334",
+					"segment": [
+						112.5,
+						120.5
+					],
+					"label": "wipe screen again"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/jXYZEb-56Wc",
+			"start": 32.38991647599843,
+			"end": 134.18868727439343,
+			"duration": 189.59,
+			"class": "PasteScreenProtectorOnPad",
+			"subset": "training"
+		},
+		"rtCpq2_HthQ": {
+			"recipe_type": 149,
+			"annotation": [
+				{
+					"id": "709",
+					"segment": [
+						4.0,
+						16.0
+					],
+					"label": "remove the old wrapper"
+				},
+				{
+					"id": "710",
+					"segment": [
+						20.0,
+						24.0
+					],
+					"label": "wrap with the new wrapper"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/rtCpq2_HthQ",
+			"start": 0.5627443595897956,
+			"end": 29.558301275318467,
+			"duration": 67.2682,
+			"class": "RewrapBattery",
+			"subset": "testing"
+		},
+		"ar2vXJj_dQI": {
+			"recipe_type": 136,
+			"annotation": [
+				{
+					"id": "634",
+					"segment": [
+						25.0,
+						37.0
+					],
+					"label": "install the new faucet"
+				},
+				{
+					"id": "635",
+					"segment": [
+						38.0,
+						131.0
+					],
+					"label": "connect the water pipe"
+				},
+				{
+					"id": "636",
+					"segment": [
+						132.0,
+						179.0
+					],
+					"label": "open the sluice and test the new faucet"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/ar2vXJj_dQI",
+			"start": 23.50439034504469,
+			"end": 184.98545619189485,
+			"duration": 190.89,
+			"class": "ReplaceFaucet",
+			"subset": "training"
+		},
+		"oDAY5PMwZgU": {
+			"recipe_type": 163,
+			"annotation": [
+				{
+					"id": "519",
+					"segment": [
+						2.0,
+						7.0
+					],
+					"label": "insert money into the vending machine"
+				},
+				{
+					"id": "520",
+					"segment": [
+						8.0,
+						13.0
+					],
+					"label": "press the corresponding button"
+				},
+				{
+					"id": "521",
+					"segment": [
+						14.0,
+						17.0
+					],
+					"label": "take out the goods"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/oDAY5PMwZgU",
+			"start": 0.5672238541906893,
+			"end": 17.205978,
+			"duration": 17.205978,
+			"class": "UseVendingMachine",
+			"subset": "training"
+		},
+		"4kiZIDOUQAo": {
+			"recipe_type": 3,
+			"annotation": [
+				{
+					"id": "438",
+					"segment": [
+						18.0,
+						22.0
+					],
+					"label": "install legs of sofa"
+				},
+				{
+					"id": "439",
+					"segment": [
+						28.0,
+						44.0
+					],
+					"label": "put on sofa cover"
+				},
+				{
+					"id": "437",
+					"segment": [
+						45.0,
+						47.0
+					],
+					"label": "place cushion and backrest"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/4kiZIDOUQAo",
+			"start": 14.034485289841813,
+			"end": 48.5297,
+			"duration": 48.5297,
+			"class": "AssembleSofa",
+			"subset": "testing"
+		},
+		"zyML-268ciU": {
+			"recipe_type": 143,
+			"annotation": [
+				{
+					"id": "8",
+					"segment": [
+						83.0,
+						95.0
+					],
+					"label": "cut off the electric wire"
+				},
+				{
+					"id": "7",
+					"segment": [
+						101.0,
+						113.0
+					],
+					"label": "remove the old rearview mirror"
+				},
+				{
+					"id": "10",
+					"segment": [
+						121.0,
+						150.0
+					],
+					"label": "reinstall the rearview mirror"
+				},
+				{
+					"id": "9",
+					"segment": [
+						151.0,
+						159.0
+					],
+					"label": "reconnect the electric wire"
+				},
+				{
+					"id": "10",
+					"segment": [
+						160.0,
+						189.0
+					],
+					"label": "reinstall the rearview mirror"
+				}
+			],
+			"video_url": "https://www.youtube.com/embed/zyML-268ciU",
+			"start": 79.5221154268518,
+			"end": 195.087657384878,
+			"duration": 237.121667,
+			"class": "ReplaceRearviewMirrorGlass",
+			"subset": "testing"
+		}
+	}
+}
