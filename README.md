@@ -16,7 +16,7 @@ git clone https://github.com/facebookresearch/segment-anything-2.git
 cd segment-anything-2
 ```
 
-2. 必要なパッケージのインストール*  
+2. 必要なパッケージのインストール  
 ```
 pip install hydra-core iopath ninja natsort
 ```
@@ -71,6 +71,7 @@ ffmpeg -framerate 10 -start_number 0 -i {output_image_dir}/%05d.jpg -c:v libx264
 ## COIN データセット
 [COmprehensive INstructional video analysis (COIN)](https://coin-dataset.github.io/):     
 COINデータセットは、180の異なるタスクに関連する11,827の動画から構成され、これらはすべてYouTubeから収集された。動画の長さは平均2.36分である。各動画は3.91ステップのセグメントでラベル付けされ、各セグメントは平均14.91秒である。このデータセットには、合計で 476 時間の動画が含まれ、46,354 のアノテーションセグメントが含まれる (上記リンク内の説明文を DeepL で翻訳)    
+
 ---
 本のデータが Youtube 動画なので商用利用時は注意が必要。基本は研究用途で利用。
 
