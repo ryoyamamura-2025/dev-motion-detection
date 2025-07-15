@@ -23,7 +23,7 @@ pip install hydra-core iopath ninja natsort
 注）`pip install -e .` は時間がかかる
 
 3. モデルのロード  
-(公式)[https://github.com/facebookresearch/segment-anything-2.git]から選ぶ*か、`checkpoints` ディレクトリにてスクリプトを実行  
+[公式](https://github.com/facebookresearch/segment-anything-2.git)から選ぶ*か、`checkpoints` ディレクトリにてスクリプトを実行  
 モデルは `checkpoints` ディレクトリ内に保管
 注）2.1 系は config ファイルを読み込めず動作しなかった
 
