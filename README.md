@@ -63,6 +63,10 @@ ffmpeg -framerate 10 -start_number 0 -i {output_image_dir}/%05d.jpg -c:v libx264
 | `-pix_fmt yuv420p`          | 互換性の高い画面形式（必要）                              |
 | `{output_video_filepath}`                | 出力ファイル名                                            |
 
+### 参考サイト
+- [Segment Anything Model 2 (SAM 2)の動画データに対するセグメンテーションのチュートリアル](https://zenn.dev/hacarus_blog/articles/be8dd532ebeda8)
+- [【SAM2】動画内から物体を自動検出・追跡する](https://qiita.com/Neckoh/items/1c411a0b71e328fe6b60)
+
 
 ## COIN データセット
 [COmprehensive INstructional video analysis (COIN)](https://coin-dataset.github.io/):     
