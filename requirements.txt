@@ -12,6 +12,8 @@ python-dotenv
 yt_dlp
 transformers
 tqdm
+nltk
+scikit-learn
 # fastapi
 # uvicorn
 
