@@ -10,6 +10,8 @@ google-cloud-storage
 pydantic
 python-dotenv
 yt_dlp
+transformers
+tqdm
 # fastapi
 # uvicorn
 
@@ -21,3 +23,6 @@ hydra-core
 iopath
 ninja
 natsort
+
+# scene detect
+scenedetect[opencv]
