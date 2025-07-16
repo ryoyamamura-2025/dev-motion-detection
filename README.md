@@ -19,8 +19,9 @@ cd segment-anything-2
 2. 必要なパッケージのインストール  
 ```
 pip install hydra-core iopath ninja natsort
+python setup.py build_ext --inplace
 ```
-注）`pip install -e .` は時間がかかる
+注）`pip install -e .` は時間がかかる。また、CPU 環境の場合 setup.py 実行時に警告が出るが問題ない。
 
 3. モデルのロード  
 [公式](https://github.com/facebookresearch/segment-anything-2.git)から選ぶ*か、`checkpoints` ディレクトリにてスクリプトを実行  
