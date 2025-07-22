@@ -28,3 +28,6 @@ natsort
 
 # scene detect
 scenedetect[opencv]
+
+# for video intelligence
+google-cloud-videointelligence
