@@ -34,7 +34,7 @@ def generate_text(prompt: str) -> str:
         str: 推論結果のテキスト
     """
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-2.5-flash-lite",
         contents=prompt
     )
 
@@ -70,6 +70,8 @@ def generate_text_with_file(prompt: str, filename: str) -> str:
     else:
         raise ValueError(f"未対応のファイル形式です: {ext}")
 
+    gen_config = genai.types.GenerateContentConfig(mediaResolution="MEDIA_RESOLUTION_LOW")
+
     try:
         contents = [
             Part.from_uri(file_uri=gs_path, mime_type=mime_type),
@@ -77,8 +79,9 @@ def generate_text_with_file(prompt: str, filename: str) -> str:
         ]
 
         response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=contents
+            model="gemini-2.5-flash",
+            contents=contents,
+            # config=gen_config
         )
 
         result = response.text
